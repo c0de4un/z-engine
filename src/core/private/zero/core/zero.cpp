@@ -16,7 +16,7 @@
 
 // zero::core
 #ifndef ZERO_CORE_HPP
-#include "../public/zero.hpp"
+#include <zero/core/zero.hpp>
 #endif // !ZERO_CORE_HPP
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

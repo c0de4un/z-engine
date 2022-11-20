@@ -4,8 +4,8 @@
 # CONSTANTS
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-set( ZENGINE_CORE_PUBLIC "${ZENGINE_CORE_DIR}/public/" )
-set( ZENGINE_CORE_PRIVATE "${ZENGINE_CORE_DIR}/private/" )
+set( ZENGINE_CORE_PUBLIC "${ZENGINE_CORE_DIR}/public/zero/core/" )
+set( ZENGINE_CORE_PRIVATE "${ZENGINE_CORE_DIR}/private/zero/core/" )
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # HEADERS

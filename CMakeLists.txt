@@ -38,4 +38,11 @@ include( "${ZENGINE_CORE_DIR}/core.cmake" )
 # Build STATIC Library
 add_library( zengine ${ZENGINE_HEADERS} ${ZENGINE_SOURCES} )
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# LINKING
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Core
+target_include_directories( zengine PUBLIC "${ZENGINE_CORE_DIR}/public" )
+
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
