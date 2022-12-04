@@ -25,11 +25,22 @@ include( "${ZERO_DIR}/cmake/globals.cmake" )
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Core
-include( "${ZERO_CORE_DIR}/core.cmake" )
+include( "${ZERO_SRC_DIR}/core/module.cmake" )
 
 # Windows
+if ( PLATFORM STREQUAL "windows" )
+    include( "${ZERO_SRC_DIR}/windows/module.cmake" )
+endif ( PLATFORM STREQUAL "windows" )
+
+# Linux
+if ( PLATFORM STREQUAL "linux" )
+    include( "${ZERO_SRC_DIR}/linux/module.cmake" )
+endif ( PLATFORM STREQUAL "linux" )
 
 # Android
+if ( PLATFORM STREQUAL "android" )
+    include( "${ZERO_SRC_DIR}/android/module.cmake" )
+endif ( PLATFORM STREQUAL "android" )
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # BUILD

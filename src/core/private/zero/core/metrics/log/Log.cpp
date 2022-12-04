@@ -46,8 +46,8 @@ namespace zero
         // CONSTRUCTORS & DESTRUCTORS
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        explicit Log::Log() noexcept = default;
-        Log::~Log() noexcept         = default;
+        Log::Log() noexcept  = default;
+        Log::~Log() noexcept = default;
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         // METHODS
