@@ -8,27 +8,19 @@
  * SOFTWARE.
 **/
 
-#ifndef ZERO_CORE_HPP
-#define ZERO_CORE_HPP
-
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // INCLUDES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// Include zero::core::config
-#ifndef ZERO_CONFIG_API_HPP
-#include <zero/core/configs/zero_api.hpp>
-#endif /// !ZERO_CONFIG_API_HPP
-
-// Include zero::core::Application
+// HEADER
 #ifndef ZERO_CORE_APPLICATION_HPP
 #include <zero/core/app/Application.hpp>
 #endif /// !ZERO_CORE_APPLICATION_HPP
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// zero::core
+// zero::core::Application
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 namespace zero
@@ -40,11 +32,41 @@ namespace zero
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // FIELDS
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        Application* Application::mInstance(nullptr);
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // CONSTRUCTOR & DESTRUCTOR
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        Application::Application() ZERO_NOEXCEPT = default;
+
+        Application::~Application() ZERO_NOEXCEPT = default;
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // METHODS
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        Application* Application::Initilize(Application* pInstance) ZERO_NOEXCEPT
+        {
+            if (!mInstance)
+                mInstance = pInstance;
+
+            return mInstance;
+        }
+
+        void Application::Terminate() ZERO_NOEXCEPT
+        {
+            delete mInstance;
+            mInstance = nullptr;
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     }
 
 }
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-#endif // !ZERO_CORE_HPP

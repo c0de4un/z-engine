@@ -12,20 +12,20 @@ cmake_minimum_required(VERSION ${PROJECT_CMAKE_VERSION})
 # PROJECT
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-project( ${ZENGINE_PROJECT_NAME} )
+project( ${ZERO_PROJECT_NAME} )
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # GLOBALS
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-include( "${ZENGINE_DIR}/cmake/globals.cmake" )
+include( "${ZERO_DIR}/cmake/globals.cmake" )
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # MODULES
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Core
-include( "${ZENGINE_CORE_DIR}/core.cmake" )
+include( "${ZERO_CORE_DIR}/core.cmake" )
 
 # Windows
 
@@ -36,13 +36,13 @@ include( "${ZENGINE_CORE_DIR}/core.cmake" )
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Build STATIC Library
-add_library( zengine ${ZENGINE_HEADERS} ${ZENGINE_SOURCES} )
+add_library( zengine ${ZERO_HEADERS} ${ZERO_SOURCES} )
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # LINKING
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Core
-target_include_directories( zengine PUBLIC "${ZENGINE_CORE_DIR}/public" )
+target_include_directories( zengine PUBLIC "${ZERO_CORE_DIR}/public" )
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =

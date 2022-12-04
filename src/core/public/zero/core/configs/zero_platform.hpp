@@ -8,43 +8,32 @@
  * SOFTWARE.
 **/
 
-#ifndef ZERO_CORE_HPP
-#define ZERO_CORE_HPP
+#ifndef ZERO_CONFIG_PLATFORM_HPP
+#define ZERO_CONFIG_PLATFORM_HPP
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// INCLUDES
+// DEFINES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// Include zero::core::config
-#ifndef ZERO_CONFIG_API_HPP
-#include <zero/core/configs/zero_api.hpp>
-#endif /// !ZERO_CONFIG_API_HPP
+#if !defined(ZERO_PLATFORM_DEFINED) || ZERO_PLATFORM_DEFINED == 0
 
-// Include zero::core::Application
-#ifndef ZERO_CORE_APPLICATION_HPP
-#include <zero/core/app/Application.hpp>
-#endif /// !ZERO_CORE_APPLICATION_HPP
+    // WINDOWS
+    #if defined( MINGW ) || defined( MINGGW32 ) || defined( MINGW64 ) || defined( WIN32 ) || defined( WIN64 ) || defined( WINDOWS ) || defined( MSVC )
+        #define ZERO_WINDOWS
+    #elif defined( __linux ) || defined( _linux ) || defined( _linux_ ) || defined( __linux__ ) || defined( LINUX )
+        // LINUX
+        #define ZERO_LINUX
+    #elif defined( ANDROID ) || defined( _android_ ) || defined( __android__ ) || defined( _android ) || defined( __android )
+        // ANDROID
+        #define ZERO_ANDROID
+    #else
+        #error "zero_platform.hpp - configuration required"
+    #endif
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// zero::core
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-namespace zero
-{
-
-    namespace core
-    {
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    }
-
-}
+#endif
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-#endif // !ZERO_CORE_HPP
+#endif /// !ZERO_CONFIG_PLATFORM_HPP
