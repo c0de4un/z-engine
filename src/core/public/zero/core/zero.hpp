@@ -17,10 +17,25 @@
 // INCLUDES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// Include zero::core::config
+// Include zero::core::api
 #ifndef ZERO_CONFIG_API_HPP
 #include <zero/core/configs/zero_api.hpp>
 #endif /// !ZERO_CONFIG_API_HPP
+
+// Include zero::core::numeric
+#ifndef ZERO_CONFIG_NUMERIC_HPP
+#include <zero/core/configs/zero_numeric.hpp>
+#endif /// !ZERO_CONFIG_NUMERIC_HPP
+
+// Include zero::core::Log
+#ifndef ZERO_CORE_LOG_HPP
+#include <zero/core/metrics/log/Log.hpp>
+#endif /// !ZERO_CORE_LOG_HPP
+
+// Include zero::core::BaseLogger
+#ifndef ZERO_CORE_BASE_LOGGER_HPP
+#include <zero/core/metrics/log/BaseLogger.hpp>
+#endif /// !ZERO_CORE_BASE_LOGGER_HPP
 
 // Include zero::core::Application
 #ifndef ZERO_CORE_APPLICATION_HPP
