@@ -20,6 +20,7 @@ set( ZERO_HEADERS
     # APPLICATION
     "${ZERO_CORE_PUBLIC}app/Application.hpp"
     # MEMORY
+    "${ZERO_CORE_PUBLIC}memory/IAllocator.hxx"
     "${ZERO_CORE_PUBLIC}memory/MemoryManager.hpp"
     "${ZERO_CORE_PUBLIC}memory/SharedPointer.hpp"
     # METRICS
