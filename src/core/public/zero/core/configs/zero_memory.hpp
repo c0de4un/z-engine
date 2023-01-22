@@ -8,8 +8,8 @@
  * SOFTWARE.
 **/
 
-#ifndef ZERO_CORE_HPP
-#define ZERO_CORE_HPP
+#ifndef ZERO_CONFIG_MEMORY_HPP
+#define ZERO_CONFIG_MEMORY_HPP
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
@@ -22,26 +22,20 @@
 #include <zero/core/configs/zero_api.hpp>
 #endif /// !ZERO_CONFIG_API_HPP
 
-// Include zero::core::numeric
-#ifndef ZERO_CONFIG_NUMERIC_HPP
-#include <zero/core/configs/zero_numeric.hpp>
-#endif /// !ZERO_CONFIG_NUMERIC_HPP
+// Include zero::core::MemoryManager
+#ifndef ZERO_CORE_MEMORY_MANAGER_HPP
+#include <zero/core/memory/MemoryManager.hpp>
+#endif /// !ZERO_CORE_MEMORY_MANAGER_HPP
 
-// Include zero::memory
-#ifndef ZERO_CONFIG_MEMORY_HPP
-#include <zero/core/configs/zero_memory.hpp>
-#endif /// !ZERO_CONFIG_MEMORY_HPP
+// Include zero::core::SharedPointer
+#ifndef ZERO_CORE_SHARED_POINTER_HPP
+#include <zero/core/memory/SharedPointer.hpp>
+#endif /// !ZERO_CORE_SHARED_POINTER_HPP
 
-// Include zero::core::Log
-#ifndef ZERO_CORE_LOG_HPP
-#include <zero/core/metrics/log/Log.hpp>
-#endif /// !ZERO_CORE_LOG_HPP
-
-// Include zero::core::Application
-#ifndef ZERO_CORE_APPLICATION_HPP
-#include <zero/core/app/Application.hpp>
-#endif /// !ZERO_CORE_APPLICATION_HPP
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// ALIASES
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-#endif // !ZERO_CORE_HPP
+#endif /// !ZERO_CONFIG_MEMORY_HPP

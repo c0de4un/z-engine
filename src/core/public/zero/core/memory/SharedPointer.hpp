@@ -1,4 +1,4 @@
-/**
+﻿/**
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -8,8 +8,8 @@
  * SOFTWARE.
 **/
 
-#ifndef ZERO_CORE_MEMORY_MANAGER_HPP
-#define ZERO_CORE_MEMORY_MANAGER_HPP
+#ifndef ZERO_CORE_SHARED_POINTER_HPP
+#define ZERO_CORE_SHARED_POINTER_HPP
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
@@ -22,6 +22,11 @@
 #include <zero/core/configs/zero_memory.hpp>
 #endif /// !ZERO_CONFIG_MEMORY_HPP
 
+// Include zero::core::MemoryManager
+#ifndef ZERO_CORE_MEMORY_MANAGER_HPP
+#include <zero/core/memory/MemoryManager.hpp>
+#endif /// !ZERO_CORE_MEMORY_MANAGER_HPP
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // TYPES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -33,20 +38,19 @@ namespace zero
     {
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+        
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        // MemoryManager
+        // SharedPointer
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         /*!
-            \brief Base memory management class
-
-            Memory management is based around blocks, resources and allocators
+            \brief Simple SharedPointer
             \date 22.01.2023
             \author c0de4un
             \version 0.1
         */
-        ZERO_API class MemoryManager final
+        template <typename T>
+        ZERO_API class SharedPointer
         {
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -62,24 +66,14 @@ namespace zero
         private:
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+            
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // CONSTRUCTOR
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            /*!
-             * @throw no exceptions
-            */
-            explicit MemoryManager() noexcept = default;
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // DELETED
+            // FIELDS
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            MemoryManager(const MemoryManager&)             = delete;
-            MemoryManager& operator=(const MemoryManager&)  = delete;
-            MemoryManager(MemoryManager&&)            = delete;
-            MemoryManager& operator=(MemoryManager&&) = delete;
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // METHODS
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -88,17 +82,29 @@ namespace zero
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // DESTRUCTOR
+            // CONSTRUCTORS & DESTRUCTOR
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             /*!
-             * @throws no exceptions
+                \brief SharedPointer constructor
+                \date 22.01.2023
+                \param address|null address to manage
             */
-            ~MemoryManager() noexcept = default;
+            explicit SharedPointer (T* const address = nullptr) ZERO_NOEXCEPT
+            {
+            }
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // METHODS
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // OPERATORS
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        }; /// zero::core::MemoryManager
+        }; /// zero::core::SharedPointer
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -106,9 +112,11 @@ namespace zero
 
 } /// zero
 
-using zMemory = zero::core::MemoryManager;
-#define ZERO_CORE_MEMORY_MANAGER_DECL
+template <typename T>
+using zShared = zero::core::SharedPointer<T>;
+
+#define ZERO_CORE_SHARED_POINTER_DECL
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-#endif // !ZERO_CORE_MEMORY_MANAGER_HPP
+#endif /// !ZERO_CORE_SHARED_POINTER_HPP

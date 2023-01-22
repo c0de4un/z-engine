@@ -14,12 +14,14 @@ set( ZERO_CORE_PRIVATE "${ZERO_CORE_DIR}/private/zero/core/" )
 set( ZERO_HEADERS
     # CONFIGS
     "${ZERO_CORE_PUBLIC}configs/zero_api.hpp"
+    "${ZERO_CORE_PUBLIC}configs/zero_memory.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_numeric.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_platform.hpp"
     # APPLICATION
     "${ZERO_CORE_PUBLIC}app/Application.hpp"
     # MEMORY
     "${ZERO_CORE_PUBLIC}memory/MemoryManager.hpp"
+    "${ZERO_CORE_PUBLIC}memory/SharedPointer.hpp"
     # METRICS
     "${ZERO_CORE_PUBLIC}metrics/log/ELogLevel.hpp"
     "${ZERO_CORE_PUBLIC}metrics/log/ILogger.hxx"
@@ -37,6 +39,7 @@ set( ZERO_SOURCES
     "${ZERO_CORE_PRIVATE}app/Application.cpp"
     # MEMORY
     "${ZERO_CORE_PRIVATE}memory/MemoryManager.cpp"
+    "${ZERO_CORE_PRIVATE}memory/SharedPointer.cpp"
     # METRICS
     "${ZERO_CORE_PRIVATE}metrics/log/Log.cpp"
     # PCH
