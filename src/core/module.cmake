@@ -18,6 +18,8 @@ set( ZERO_HEADERS
     "${ZERO_CORE_PUBLIC}configs/zero_platform.hpp"
     # APPLICATION
     "${ZERO_CORE_PUBLIC}app/Application.hpp"
+    # MEMORY
+    "${ZERO_CORE_PUBLIC}memory/MemoryManager.hpp"
     # METRICS
     "${ZERO_CORE_PUBLIC}metrics/log/ELogLevel.hpp"
     "${ZERO_CORE_PUBLIC}metrics/log/ILogger.hxx"
@@ -33,6 +35,8 @@ set( ZERO_HEADERS
 set( ZERO_SOURCES
     # APPLICATION
     "${ZERO_CORE_PRIVATE}app/Application.cpp"
+    # MEMORY
+    "${ZERO_CORE_PRIVATE}memory/MemoryManager.cpp"
     # METRICS
     "${ZERO_CORE_PRIVATE}metrics/log/Log.cpp"
     # PCH
