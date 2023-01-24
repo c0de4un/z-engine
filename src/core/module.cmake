@@ -14,6 +14,7 @@ set( ZERO_CORE_PRIVATE "${ZERO_CORE_DIR}/private/zero/core/" )
 set( ZERO_HEADERS
     # CONFIGS
     "${ZERO_CORE_PUBLIC}configs/zero_api.hpp"
+    "${ZERO_CORE_PUBLIC}configs/zero_atomic.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_memory.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_numeric.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_platform.hpp"

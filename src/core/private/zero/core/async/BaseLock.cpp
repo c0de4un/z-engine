@@ -19,6 +19,11 @@
 #include <zero/core/async/BaseLock.hpp>
 #endif /// !ZERO_CORE_BASE_LOCK_HPP
 
+// Include zero::core::ILock
+#ifndef ZERO_CORE_I_LOCK_HXX
+#include <zero/core/async/ILock.hxx>
+#endif /// !ZERO_CORE_I_LOCK_HXX
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // BaseLock
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
