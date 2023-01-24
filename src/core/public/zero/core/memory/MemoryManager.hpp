@@ -22,6 +22,18 @@
 #include <zero/core/configs/zero_memory.hpp>
 #endif /// !ZERO_CONFIG_MEMORY_HPP
 
+// Include zero::numeric
+#ifndef ZERO_CONFIG_NUMERIC_HPP
+#include <zero/core/configs/zero_numeric.hpp>
+#endif /// !ZERO_CONFIG_NUMERIC_HPP
+
+// Include zero::core::IAllocator
+#ifndef ZERO_CORE_I_ALLOCATOR_DECL
+#define ZERO_CORE_I_ALLOCATOR_DECL
+namespace zero { namespace core { class IAllocator; } }
+using zIAllocator = zero::core::IAllocator;
+#endif /// !ZERO_CORE_I_ALLOCATOR_DECL
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // TYPES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -64,13 +76,19 @@ namespace zero
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // FIELDS
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            static MemoryManager* mInstance;
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // CONSTRUCTOR
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             /*!
              * @throw no exceptions
             */
-            explicit MemoryManager() noexcept = default;
+            explicit MemoryManager() noexcept;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // DELETED
@@ -94,7 +112,44 @@ namespace zero
             /*!
              * @throws no exceptions
             */
-            ~MemoryManager() noexcept = default;
+            ~MemoryManager() noexcept;
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // METHODS
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            /*!
+             * @brief Initialize MemoryManager
+             * @throw no exception
+            */
+            static MemoryManager* Initialize() ZERO_NOEXCEPT;
+
+            /*!
+             * @brief Terminate Memory manager
+             * @throw no exception
+            */
+            static void Terminate() ZERO_NOEXCEPT;
+
+            /*!
+             * @brief Register allocator
+             * @param pAllocator allocator to register
+             * @return allocator id
+             * @throw no exception
+            */
+            z_uint_8_t registerAllocator(zIAllocator* const pAllocator) ZERO_NOEXCEPT;
+
+            /*!
+             * @brief Unregister allocator
+             * @param id allocator id
+             * @throw no exception
+            */
+            void unregisterAllocator(const z_uint_8_t id) ZERO_NOEXCEPT;
+
+            /*!
+             * @param allocType allocator id
+             * @throw no exception
+            */
+            zIAllocator* getAllocator(const z_uint_8_t id) const ZERO_NOEXCEPT;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

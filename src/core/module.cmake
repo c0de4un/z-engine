@@ -19,6 +19,9 @@ set( ZERO_HEADERS
     "${ZERO_CORE_PUBLIC}configs/zero_platform.hpp"
     # APPLICATION
     "${ZERO_CORE_PUBLIC}app/Application.hpp"
+    # ASYNC
+    "${ZERO_CORE_PUBLIC}async/IMutex.hxx"
+    "${ZERO_CORE_PUBLIC}async/ILock.hxx"
     # MEMORY
     "${ZERO_CORE_PUBLIC}memory/IAllocator.hxx"
     "${ZERO_CORE_PUBLIC}memory/MemoryManager.hpp"

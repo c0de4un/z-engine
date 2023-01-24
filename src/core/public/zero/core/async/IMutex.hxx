@@ -136,7 +136,7 @@ namespace zero
 
 } /// zero
 
-
+using zIMutex = zero::core::IMutex;
 #define ZERO_CORE_I_MUTEX_DECL
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
