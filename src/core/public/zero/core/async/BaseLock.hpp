@@ -8,8 +8,8 @@
  * SOFTWARE.
 **/
 
-#ifndef ZERO_CORE_I_LOCK_HXX
-#define ZERO_CORE_I_LOCK_HXX
+#ifndef ZERO_CORE_BASE_LOCK_HPP
+#define ZERO_CORE_BASE_LOCK_HPP
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
@@ -17,21 +17,10 @@
 // INCLUDES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// Include zero::api
-#ifndef ZERO_CONFIG_API_HPP
-#include <zero/core/configs/zero_api.hpp>
-#endif /// !ZERO_CONFIG_API_HPP
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// FORWARD-DECLARATIONS
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-// Forward declare zero::core::IMutex
-#ifndef ZERO_CORE_I_MUTEX_DECL
-#define ZERO_CORE_I_MUTEX_DECL
-namespace zero { namespace core { class IMutex; } }
-using zIMutex = zero::core::IMutex;
-#endif /// !ZERO_CORE_I_MUTEX_DECL
+// Include zero::core::ILock
+#ifndef ZERO_CORE_I_LOCK_HXX
+#include <zero/core/async/ILock.hxx>
+#endif /// !ZERO_CORE_I_LOCK_HXX
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // TYPES
@@ -46,16 +35,16 @@ namespace zero
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        // ILock
+        // BaseLock
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        /**
-         * @brief Lock contract
-         * @date 22.01.2023
+        /*!
+         * @brief BaseLock
+         * @date 24.01.2023
          * @author c0de4un
          * @version 1.3
-        **/
-        ZERO_API class ILock
+        */
+        ZERO_API class BaseLock : public zILock
         {
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -64,7 +53,38 @@ namespace zero
             // META
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            ZERO_INTERFACE
+            ZERO_CLASS
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        protected:
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // FIELDS
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            zIMutex* mMutex;
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // CONSTRUCTOR
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            /*!
+             * @param pMutex mutex
+             * @throw throw no exception
+            */
+            explicit BaseLock(zIMutex* const pMutex) ZERO_NOEXCEPT;
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // DELETED
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            BaseLock(const BaseLock&)            noexcept = delete;
+            BaseLock& operator=(const BaseLock&) noexcept = delete;
+            BaseLock(BaseLock&&)                 noexcept = delete;
+            BaseLock& operator=(BaseLock&&)      noexcept = delete;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -76,52 +96,14 @@ namespace zero
             // DESTRUCTOR
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            /**
-             * @brief
-             * ILock destructor.
-             * 
-             * @throws - no exceptions.
-            **/
-            virtual ~ILock() ZERO_NOEXCEPT = default;
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // GETTERS & SETTERS
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            /**
-             * @brief
-             * Check if this lock is locked.
-             *
-             * @thread_safety - atomic-flag used.
-             * @throws - no exceptions.
-            **/
-            virtual bool isLocked() ZERO_NOEXCEPT = 0;
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // METHODS
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            /**
-             * @param pMutex mutex to use (switch to)
-             * @return 'true' if locked, 'false' if failed
-             * @throw can throw exception
-            **/
-            virtual bool try_lock(zIMutex* const pMutex = nullptr) = 0;
-
-            /**
-             * @param pMutex mutex to use (switch to)
-             * @throw can throw exception
-            **/
-            virtual void lock(zIMutex* const pMutex = nullptr) = 0;
-
-            /**
-             * @throw can throw exception
-            **/
-            virtual void unlock() ZERO_NOEXCEPT = 0;
+            /*!
+             * @throw no exception
+            */
+            virtual ~BaseLock() ZERO_NOEXCEPT;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        }; /// zero::core::ILock
+        }; /// zero::core::BaseLock
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -129,9 +111,8 @@ namespace zero
 
 } /// zero
 
-using zILock = zero::core::ILock;
-#define ZERO_CORE_I_LOCK_DECL
+using zBaseLock = zero::core::BaseLock;
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-#endif /// !ZERO_CORE_I_LOCK_HXX
+#endif /// !ZERO_CORE_BASE_LOCK_HPP

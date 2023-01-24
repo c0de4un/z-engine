@@ -20,6 +20,7 @@ set( ZERO_HEADERS
     # APPLICATION
     "${ZERO_CORE_PUBLIC}app/Application.hpp"
     # ASYNC
+    "${ZERO_CORE_PUBLIC}async/BaseLock.hpp"
     "${ZERO_CORE_PUBLIC}async/IMutex.hxx"
     "${ZERO_CORE_PUBLIC}async/ILock.hxx"
     # MEMORY
@@ -41,6 +42,8 @@ set( ZERO_HEADERS
 set( ZERO_SOURCES
     # APPLICATION
     "${ZERO_CORE_PRIVATE}app/Application.cpp"
+    # ASYNC
+    "${ZERO_CORE_PRIVATE}async/BaseLock.cpp"
     # MEMORY
     "${ZERO_CORE_PRIVATE}memory/MemoryManager.cpp"
     "${ZERO_CORE_PRIVATE}memory/SharedPointer.cpp"
