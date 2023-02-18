@@ -29,7 +29,7 @@
 // TYPES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-template <template T>
+template <typename T>
 using zAtomic = std::atomic<T>;
 
 using zABool = std::atomic_bool;

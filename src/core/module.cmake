@@ -24,6 +24,7 @@ set( ZERO_HEADERS
     "${ZERO_CORE_PUBLIC}async/BaseLock.hpp"
     "${ZERO_CORE_PUBLIC}async/IMutex.hxx"
     "${ZERO_CORE_PUBLIC}async/ILock.hxx"
+    "${ZERO_CORE_PUBLIC}async/Mutex.hpp"
     # MEMORY
     "${ZERO_CORE_PUBLIC}memory/IAllocator.hxx"
     "${ZERO_CORE_PUBLIC}memory/MemoryManager.hpp"
@@ -45,6 +46,7 @@ set( ZERO_SOURCES
     "${ZERO_CORE_PRIVATE}app/Application.cpp"
     # ASYNC
     "${ZERO_CORE_PRIVATE}async/BaseLock.cpp"
+    "${ZERO_CORE_PRIVATE}async/Mutex.cpp"
     # MEMORY
     "${ZERO_CORE_PRIVATE}memory/MemoryManager.cpp"
     "${ZERO_CORE_PRIVATE}memory/SharedPointer.cpp"
