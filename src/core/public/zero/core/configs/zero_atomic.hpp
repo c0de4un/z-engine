@@ -34,6 +34,8 @@ using zAtomic = std::atomic<T>;
 
 using zABool = std::atomic_bool;
 
+using zFlag = std::atomic_flag;
+
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 #endif /// !ZERO_CONFIG_ATOMIC_HPP
