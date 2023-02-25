@@ -38,6 +38,7 @@ namespace zero
         Mutex::Mutex () ZERO_NOEXCEPT
             :
             mLocked(false),
+            mLockedFlag(ATOMIC_FLAG_INIT),
             mMutex()
         {
         }
@@ -50,8 +51,7 @@ namespace zero
 
         bool Mutex::isLocked()
         {
-            const bool locked( mLocked );
-            return locked;
+            return mLocked;
         }
 
         Mutex::handle_t Mutex::native_handle() ZERO_NOEXCEPT
@@ -68,9 +68,11 @@ namespace zero
             if (isLocked())
                 return true;
 
-            if (mMutex.try_lock())
+            if (!mLockedFlag.test_and_set())
             {
-                mLocked = true;
+                if (mMutex.try_lock())
+                    mLocked = true;
+
                 return true;
             }
 
@@ -79,16 +81,29 @@ namespace zero
 
         void Mutex::lock()
         {
-            mLocked = true;
-
-            mMutex.lock();
+            if (!mLockedFlag.test_and_set())
+            {
+                mLocked = true;
+                mMutex.lock();
+            }
         }
 
         void Mutex::unlock() ZERO_NOEXCEPT
         {
-            mLocked = false;
+            if (!isLocked())
+                return;
 
-            mMutex.unlock();
+            try
+            {
+                mMutex.unlock();
+            }
+            catch (...)
+            {
+                // empty
+            }
+
+            mLockedFlag.clear();
+            mLocked = false;
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

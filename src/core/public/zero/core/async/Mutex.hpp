@@ -73,7 +73,8 @@ namespace zero
             // FIELDS
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            zABool     mLocked;
+            bool       mLocked;
+            zFlag      mLockedFlag;
             std::mutex mMutex;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
