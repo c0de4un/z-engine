@@ -54,7 +54,7 @@ namespace zero
             return locked;
         }
 
-        void* Mutex::native_handle() ZERO_NOEXCEPT
+        Mutex::handle_t Mutex::native_handle() ZERO_NOEXCEPT
         {
             return &mMutex;
         }

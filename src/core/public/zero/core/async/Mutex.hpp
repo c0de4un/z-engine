@@ -125,7 +125,7 @@ namespace zero
              * @thread_safety not thread-safe
              * @throws no exception
             **/
-            virtual void* native_handle() ZERO_NOEXCEPT final;
+            virtual handle_t native_handle() ZERO_NOEXCEPT final;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // METHODS
