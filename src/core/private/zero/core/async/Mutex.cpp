@@ -38,9 +38,10 @@ namespace zero
         Mutex::Mutex () ZERO_NOEXCEPT
             :
             mLocked(false),
-            mLockedFlag(ATOMIC_FLAG_INIT),
+            mLockedFlag(),
             mMutex()
         {
+            mLockedFlag.clear();
         }
 
         Mutex::~Mutex() ZERO_NOEXCEPT = default;
