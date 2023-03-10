@@ -27,6 +27,17 @@
 #include <zero/core/configs/zero_numeric.hpp>
 #endif /// !ZERO_CONFIG_NUMERIC_HPP
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// FORWARD-DECLARATIONS
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// Forward declare zero::core::IMutex
+#ifndef ZERO_CORE_I_MUTEX_DECL
+#define ZERO_CORE_I_MUTEX_DECL
+namespace zero { namespace core { class IMutex; } }
+using zIMutex = zero::core::IMutex;
+#endif /// !ZERO_CORE_I_MUTEX_DECL
+
 // Include zero::core::IAllocator
 #ifndef ZERO_CORE_I_ALLOCATOR_DECL
 #define ZERO_CORE_I_ALLOCATOR_DECL
@@ -79,6 +90,8 @@ namespace zero
             // FIELDS
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+            static zIMutex*       mInstanceMutex;
+
             static MemoryManager* mInstance;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -86,9 +99,9 @@ namespace zero
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             /*!
-             * @throw no exceptions
+               \@throw bad_alloc
             */
-            explicit MemoryManager() noexcept;
+            explicit MemoryManager();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // DELETED
@@ -96,8 +109,8 @@ namespace zero
 
             MemoryManager(const MemoryManager&)             = delete;
             MemoryManager& operator=(const MemoryManager&)  = delete;
-            MemoryManager(MemoryManager&&)            = delete;
-            MemoryManager& operator=(MemoryManager&&) = delete;
+            MemoryManager(MemoryManager&&)                  = delete;
+            MemoryManager& operator=(MemoryManager&&)       = delete;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -110,9 +123,9 @@ namespace zero
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             /*!
-             * @throws no exceptions
+               \throws nothing
             */
-            ~MemoryManager() noexcept;
+            ~MemoryManager() ZERO_NOEXCEPT;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // METHODS

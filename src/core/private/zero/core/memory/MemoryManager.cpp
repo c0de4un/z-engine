@@ -19,6 +19,11 @@
 #include <zero/core/memory/MemoryManager.hpp>
 #endif /// !ZERO_CORE_MEMORY_MANAGER_HPP
 
+// Include zero::mutex
+#ifndef ZERO_CONFIG_MUTEX_HPP
+#include <zero/core/configs/zero_mutex.hpp>
+#endif /// !ZERO_CONFIG_MUTEX_HPP
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // MemoryManager
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -35,13 +40,51 @@ namespace zero
         // FIELDS
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+        zIMutex* MemoryManager::mInstanceMutex(new zero::core::Mutex());
+
+        MemoryManager* MemoryManager::mInstance(nullptr);
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         // CONSTRUCTOR & DESTRUCTOR
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+        MemoryManager::MemoryManager()                = default;
+        MemoryManager::~MemoryManager() ZERO_NOEXCEPT = default;
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         // METHODS
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        MemoryManager* MemoryManager::Initialize() ZERO_NOEXCEPT
+        {
+            zThreadLock lock(mInstanceMutex);
+
+            if (mInstance)
+            {
+                // Guarded-Block
+                try
+                {
+                    mInstance = new MemoryManager();
+                }
+                catch (...)
+                {
+                    return nullptr;
+                }
+            }
+
+            return mInstance;
+        }
+
+        void MemoryManager::Terminate() ZERO_NOEXCEPT
+        {
+            zThreadLock lock(mInstanceMutex);
+
+            if (!mInstance)
+                return;
+
+            delete mInstance;
+            mInstance = nullptr;
+        }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
