@@ -24,6 +24,11 @@
 #include <zero/core/async/ILock.hxx>
 #endif /// !ZERO_CORE_I_LOCK_HXX
 
+// Include zero::core::IMutex
+#ifndef ZERO_CORE_I_MUTEX_HXX
+#include <zero/core/async/IMutex.hxx>
+#endif /// !ZERO_CORE_I_MUTEX_HXX
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // BaseLock
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -47,6 +52,13 @@ namespace zero
         }
 
         BaseLock::~BaseLock() ZERO_NOEXCEPT = default;
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // METHODS.ILock
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        bool BaseLock::isLocked() ZERO_NOEXCEPT
+        { return mMutex->isLocked(); }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

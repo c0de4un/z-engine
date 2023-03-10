@@ -102,6 +102,19 @@ namespace zero
             virtual ~BaseLock() ZERO_NOEXCEPT;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // METHODS.ILock
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            /**
+             * @brief
+             * Check if this lock is locked.
+             *
+             * @thread_safety - atomic-flag used.
+             * @throws - no exceptions.
+            **/
+            virtual bool isLocked() ZERO_NOEXCEPT final;
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         }; /// zero::core::BaseLock
 
