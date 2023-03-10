@@ -17,7 +17,7 @@
 // INCLUDES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// Include zero::core::api
+// Include zero::api
 #ifndef ZERO_CONFIG_API_HPP
 #include <zero/core/configs/zero_api.hpp>
 #endif /// !ZERO_CONFIG_API_HPP
@@ -31,10 +31,6 @@
 #ifndef ZERO_CORE_SHARED_POINTER_HPP
 #include <zero/core/memory/SharedPointer.hpp>
 #endif /// !ZERO_CORE_SHARED_POINTER_HPP
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// ALIASES
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 

@@ -86,6 +86,26 @@ namespace zero
             mInstance = nullptr;
         }
 
+        MemoryManager* MemoryManager::getInstance() noexcept
+        { return mInstance; }
+
+        z_uint_8_t MemoryManager::registerAllocator(zIAllocator* const pAllocator) ZERO_NOEXCEPT
+        {
+            // @TODO: MemoryManager::registerAllocator()
+            return 0;
+        }
+
+        void MemoryManager::unregisterAllocator(const z_uint_8_t id) ZERO_NOEXCEPT
+        {
+            // @TODO: MemoryManager::unregisterAllocator()
+        }
+
+        zIAllocator* MemoryManager::getAllocator(const z_uint_8_t id) const ZERO_NOEXCEPT
+        {
+            // @TODO: MemoryManager::getAllocator()
+            return nullptr;
+        }
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     } /// zero::core

@@ -144,6 +144,12 @@ namespace zero
             static void Terminate() ZERO_NOEXCEPT;
 
             /*!
+               \return MemoryManager instance or nullptr
+               \throws nothing
+            */
+            static MemoryManager* getInstance() noexcept;
+
+            /*!
              * @brief Register allocator
              * @param pAllocator allocator to register
              * @return allocator id

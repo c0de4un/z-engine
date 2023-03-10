@@ -22,11 +22,6 @@
 #include <zero/core/configs/zero_memory.hpp>
 #endif /// !ZERO_CONFIG_MEMORY_HPP
 
-// Include zero::core::MemoryManager
-#ifndef ZERO_CORE_MEMORY_MANAGER_HPP
-#include <zero/core/memory/MemoryManager.hpp>
-#endif /// !ZERO_CORE_MEMORY_MANAGER_HPP
-
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // TYPES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -44,24 +39,14 @@ namespace zero
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         /*!
-            \brief Simple SharedPointer
+            \brief Simple SharedPointer implementation. Compatable with STL shared_ptr API
             \date 22.01.2023
             \author c0de4un
             \version 0.1
         */
         template <typename T>
-        ZERO_API class SharedPointer
+        class SharedPointer final
         {
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // META
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            ZERO_CLASS
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         private:
 
@@ -71,16 +56,44 @@ namespace zero
             // FIELDS
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+            T* mAddress;
+
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // METHODS
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            inline void setRef(T* const pAddress)
+            {
+                mAddress = pAddress;
+
+                zMemory* memoryManager(zMemory::getInstance());
+                memoryManager->registerReferenceUser(pAddress);
+            }
+
+            inline void unref()
+            {
+                if (mAddress)
+                {
+                    zMemory* memoryManager(zMemory::getInstance());
+                    memoryManager->unregisterReferenceUser(mAddress, mDeleter, mAllocator);
+
+                    mAddress = nullptr;
+                }
+            }
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // DELETED
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            SharedPointer(SharedPointer&&)            = delete;
+            SharedPointer& operator=(SharedPointer&&) = delete;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         public:
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+             
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // CONSTRUCTORS & DESTRUCTOR
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -88,19 +101,74 @@ namespace zero
             /*!
                 \brief SharedPointer constructor
                 \date 22.01.2023
-                \param address|null address to manage
+                \param address|nullptr address to manage
+                \param pDeleter|nullptr deleter
+                \param pAlloc|nullptr allocator to use
             */
-            explicit SharedPointer (T* const address = nullptr) ZERO_NOEXCEPT
+            explicit SharedPointer (
+                T* const address = nullptr
+            )
+                :
+                mAddress(nullptr)
             {
+                setRef(address);
+            }
+
+            SharedPointer(SharedPointer& other)
+                :
+                mAddress(other.mAddress)
+            {
+                if (other.mAddress)
+                    setRef(other.mAddress);
+            }
+
+            ~SharedPointer() ZERO_NOEXCEPT
+            {
+                if (mAddress)
+                {
+                    try { unref(); }
+                    catch (...) {}
+                }
             }
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // METHODS
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+            T* get() const ZERO_NOEXCEPT
+            { return mAddress; }
+
+            unsigned int use_count() const
+            {
+                zMemory* memoryManager(zMemory::getInstance());
+
+                return memoryManager ? memoryManager->countReferenceUsers(mAddress) : 0;
+            }
+
+            void reset(T* const pAddress = nullptr)
+            {
+                if (pAddress === mAddress)
+                    return;
+
+                if (mAddress)
+                    unref();
+
+                if (pAddress)
+                    setRef(pAddress);
+            }
+
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // OPERATORS
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            T& operator*() const ZERO_NOEXCEPT
+            { return *mAddress; }
+
+            T* operator->() const ZERO_NOEXCEPT
+            { return mAddress; }
+
+            void operator=(T* const pAddress) ZERO_NOEXCEPT
+            { reset(pAddress); }
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -114,8 +182,6 @@ namespace zero
 
 template <typename T>
 using zShared = zero::core::SharedPointer<T>;
-
-#define ZERO_CORE_SHARED_POINTER_DECL
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
