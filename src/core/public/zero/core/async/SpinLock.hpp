@@ -8,8 +8,8 @@
  * SOFTWARE.
 **/
 
-#ifndef ZERO_CORE_I_LOCK_HXX
-#define ZERO_CORE_I_LOCK_HXX
+#ifndef ZERO_CORE_SPIN_LOCK_HPP
+#define ZERO_CORE_SPIN_LOCK_HPP
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
@@ -17,21 +17,10 @@
 // INCLUDES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// Include zero::api
-#ifndef ZERO_CONFIG_API_HPP
-#include <zero/core/configs/zero_api.hpp>
-#endif /// !ZERO_CONFIG_API_HPP
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// FORWARD-DECLARATIONS
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-// Forward declare zero::core::IMutex
-#ifndef ZERO_CORE_I_MUTEX_DECL
-#define ZERO_CORE_I_MUTEX_DECL
-namespace zero { namespace core { class IMutex; } }
-using zIMutex = zero::core::IMutex;
-#endif /// !ZERO_CORE_I_MUTEX_DECL
+// Include zero::core::BaseLock
+#ifndef ZERO_CORE_BASE_LOCK_HPP
+#include "./BaseLock.hpp"
+#endif /// !ZERO_CORE_BASE_LOCK_HPP
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // TYPES
@@ -46,16 +35,17 @@ namespace zero
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        // ILock
+        // SpinLock
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        /**
-         * @brief Lock contract
-         * @date 22.01.2023
-         * @author c0de4un
-         * @version 1.3
-        **/
-        ZERO_API class ILock
+        /*!
+           \brief Spin lock implementation. Based on loading CPU core to avoid context switching
+           (unlikely thread-wait etc).
+           \version 1.2
+           \authors c0de4un
+           \since 10.03.2023
+        */
+        ZERO_API class SpinLock final : public zBaseLock
         {
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -64,7 +54,22 @@ namespace zero
             // META
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            ZERO_INTERFACE
+            ZERO_CLASS
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        private:
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // DELETED
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            SpinLock(const SpinLock&)            = delete;
+            SpinLock& operator=(const SpinLock&) = delete;
+            SpinLock(SpinLock&&)                 = delete;
+            SpinLock& operator=(SpinLock&&)      = delete;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -73,32 +78,28 @@ namespace zero
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // DESTRUCTOR
+            // CONSTANTS
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            /**
-             * @brief
-             * ILock destructor.
-             * 
-             * @throws - no exceptions.
-            **/
-            virtual ~ILock() ZERO_NOEXCEPT = default;
+            static constexpr const unsigned char MAX_SPIN = 240;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // GETTERS & SETTERS
+            // CONSTRUCTORS & DESTRUCTOR
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            /**
-             * @brief
-             * Check if this lock is locked.
-             *
-             * @thread_safety - atomic-flag used.
-             * @throws - no exceptions.
-            **/
-            virtual bool isLocked() ZERO_NOEXCEPT = 0;
+            /*!
+               \param pMutex mutex contract instance to use
+               \throws std::bad_alloc
+            */
+            explicit SpinLock(zIMutex* const pMutex) ZERO_NOEXCEPT;
+
+            /*!
+               \throws nothing
+            */
+            virtual ~SpinLock() ZERO_NOEXCEPT;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // METHODS
+            // METHODS.ILock
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             /**
@@ -106,22 +107,22 @@ namespace zero
              * @return 'true' if locked, 'false' if failed
              * @throw can throw exception
             **/
-            virtual bool try_lock(zIMutex* const pMutex = nullptr) ZERO_NOEXCEPT = 0;
+            virtual bool try_lock(zIMutex* const pMutex = nullptr) ZERO_NOEXCEPT final;
 
             /**
              * @param pMutex mutex to use (switch to)
              * @throw can throw exception
             **/
-            virtual void lock(zIMutex* const pMutex = nullptr) = 0;
+            virtual void lock(zIMutex* const pMutex = nullptr) final;
 
             /**
              * @throw can throw exception
             **/
-            virtual void unlock() ZERO_NOEXCEPT = 0;
+            virtual void unlock() ZERO_NOEXCEPT final;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        }; /// zero::core::ILock
+        }; /// zero::core::SpinLock
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -129,9 +130,8 @@ namespace zero
 
 } /// zero
 
-using zILock = zero::core::ILock;
-#define ZERO_CORE_I_LOCK_DECL
+using zSpinLock = zero::core::SpinLock;
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-#endif /// !ZERO_CORE_I_LOCK_HXX
+#endif /// !ZERO_CORE_SPIN_LOCK_HPP

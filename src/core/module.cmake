@@ -16,6 +16,7 @@ set( ZERO_HEADERS
     "${ZERO_CORE_PUBLIC}configs/zero_api.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_atomic.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_memory.hpp"
+    "${ZERO_CORE_PUBLIC}configs/zero_mutex.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_numeric.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_platform.hpp"
     # APPLICATION
@@ -26,6 +27,7 @@ set( ZERO_HEADERS
     "${ZERO_CORE_PUBLIC}async/ISharedMutex.hxx"
     "${ZERO_CORE_PUBLIC}async/ILock.hxx"
     "${ZERO_CORE_PUBLIC}async/Mutex.hpp"
+    "${ZERO_CORE_PUBLIC}async/SpinLock.hpp"
     # MEMORY
     "${ZERO_CORE_PUBLIC}memory/IAllocator.hxx"
     "${ZERO_CORE_PUBLIC}memory/MemoryManager.hpp"
@@ -48,6 +50,7 @@ set( ZERO_SOURCES
     # ASYNC
     "${ZERO_CORE_PRIVATE}async/BaseLock.cpp"
     "${ZERO_CORE_PRIVATE}async/Mutex.cpp"
+    "${ZERO_CORE_PRIVATE}async/SpinLock.cpp"
     # MEMORY
     "${ZERO_CORE_PRIVATE}memory/MemoryManager.cpp"
     "${ZERO_CORE_PRIVATE}memory/SharedPointer.cpp"

@@ -8,16 +8,32 @@
  * SOFTWARE.
 **/
 
+#ifndef ZERO_CONFIG_MUTEX_HPP
+#define ZERO_CONFIG_MUTEX_HPP
+
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // INCLUDES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// Include zero::platform
+// Include zero::core::Mutex
+#ifndef ZERO_CORE_MUTEX_HPP
+#include <zero/core/async/Mutex.hpp>
+#endif /// !ZERO_CORE_MUTEX_HPP
+
+// Include zero::core::SpinLock
+#ifndef ZERO_CORE_SPIN_LOCK_HPP
+#include <zero/core/async/SpinLock.hpp>
+#endif /// !ZERO_CORE_SPIN_LOCK_HPP
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // TYPES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+// Use SpinLock as default Thread-Lock
+using zThreadLock = zero::core::SpinLock;
+
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+#endif /// !ZERO_CONFIG_MUTEX_HPP
