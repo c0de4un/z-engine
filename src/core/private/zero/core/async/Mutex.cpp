@@ -85,7 +85,14 @@ namespace zero
             if (!mLockedFlag.test_and_set())
             {
                 mLocked = true;
-                mMutex.lock();
+                try
+                {
+                    mMutex.lock();
+                }
+                catch (...)
+                {
+                    // empty
+                }
             }
         }
 

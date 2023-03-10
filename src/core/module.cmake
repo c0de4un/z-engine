@@ -23,6 +23,7 @@ set( ZERO_HEADERS
     # ASYNC
     "${ZERO_CORE_PUBLIC}async/BaseLock.hpp"
     "${ZERO_CORE_PUBLIC}async/IMutex.hxx"
+    "${ZERO_CORE_PUBLIC}async/ISharedMutex.hxx"
     "${ZERO_CORE_PUBLIC}async/ILock.hxx"
     "${ZERO_CORE_PUBLIC}async/Mutex.hpp"
     # MEMORY
