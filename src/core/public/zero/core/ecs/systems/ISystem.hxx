@@ -1,0 +1,146 @@
+/**
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+**/
+
+#ifndef ZERO_ECS_I_SYSTEM_HXX
+#define ZERO_ECS_I_SYSTEM_HXX
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// INCLUDES
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// Include zero::api
+#ifndef ZERO_CONFIG_API_HPP
+#include <zero/core/configs/zero_api.hpp>
+#endif /// !ZERO_CONFIG_API_HPP
+
+// Include zero::numeric
+#ifndef ZERO_CONFIG_NUMERIC_HPP
+#include <zero/core/configs/zero_numeric.hpp>
+#endif /// !ZERO_CONFIG_NUMERIC_HPP
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// TYPES
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+namespace zero
+{
+
+    namespace ecs
+    {
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // ISystem
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        /*!
+           \brief System contract
+           \version 1.1
+           \authors c0de4un
+           \since 12.03.2023
+        */
+        ZERO_API class ISystem
+        {
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // META
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            ZERO_INTERFACE
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public:
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // DESTRUCTOR
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            /*!
+               \throws nothing
+            */
+            virtual ~ISystem() ZERO_NOEXCEPT = default;
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // GETTERS & SETTERS
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            /*!
+               \thread_safety thread-safe
+               \throws nothing
+            */
+            virtual bool isStarted() const ZERO_NOEXCEPT = 0;
+
+            /*!
+               \thread_safety thread-safe
+               \throws nothing
+            */
+            virtual bool isPaused() const ZERO_NOEXCEPT = 0;
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // METHODS
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            /*!
+               \brief Start or Resume System
+               \thread_safety thread-safe (locks)
+               \return
+               < 0 if error
+               0 if failed
+               > 0 if OK
+               \throws can throw exception
+            */
+            virtual z_int_8_t Start() = 0;
+
+            /*!
+             * @brief Pause System
+             * @thread_safety - thread-safe
+             * @return > 0 if OK, < 0 if error, 0 if failed
+             * @throws can throw exception
+            */
+            virtual z_int_8_t Pause() = 0;
+
+            /*!
+               \brief Resume System. Same as calling Start after Stop()
+               \return
+               < 0 if error
+               0 if failed
+               > 0 if OK
+            */
+            virtual z_int_8_t Resume() = 0;
+
+            /*!
+             * @brief 
+            */
+            virtual void Stop() ZERO_NOEXCEPT = 0;
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        }; /// zero::ecs::ISystem
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    } /// zero::ecs
+
+} /// zero
+
+using zISystem = zero::ecs::ISystem;
+#define ZERO_ECS_I_SYSTEM_DECL
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+#endif /// !ZERO_ECS_I_SYSTEM_HXX
