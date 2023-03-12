@@ -8,8 +8,8 @@
  * SOFTWARE.
 **/
 
-#ifndef ZERO_CORE_MUTEX_HPP
-#define ZERO_CORE_MUTEX_HPP
+#ifndef ZERO_ECS_ID_STORAGE_HPP
+#define ZERO_ECS_ID_STORAGE_HPP
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
@@ -17,18 +17,15 @@
 // INCLUDES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// Include zero::core::IMutex
-#ifndef ZERO_CORE_I_MUTEX_HXX
-#include <zero/core/async/IMutex.hxx>
-#endif /// !ZERO_CORE_I_MUTEX_HXX
+// Include zero::mutex
+#ifndef ZERO_CONFIG_MUTEX_HPP
+#include <zero/core/configs/zero_mutex.hpp>
+#endif /// !ZERO_CONFIG_MUTEX_HPP
 
-// Include zero::atomic
-#ifndef ZERO_CONFIG_ATOMIC_HPP
-#include <zero/core/configs/zero_atomic.hpp>
-#endif /// !ZERO_CONFIG_ATOMIC_HPP
-
-// Include STL mutex
-#include <mutex>
+// Include zero::map
+#ifndef ZERO_CONFIG_MAP_HPP
+#include <zero/core/configs/zero_map.hpp>
+#endif /// !ZERO_CONFIG_MAP_HPP
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // TYPES
@@ -37,22 +34,23 @@
 namespace zero
 {
 
-    namespace core
+    namespace ecs
     {
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        // Mutex
+        // IDStorage
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         /*!
-         * @brief Mutex wrapper for STL mutex API
-         * @version 1.3
-         * @author c0de4un
-         * @since 28.01.2023
+           \brief Thread-safe ids storage for ecs
+           \version 1.2
+           \since 11.03.2023
+           \authors c0de4un
         */
-        ZERO_API class Mutex final : public zIMutex
+        template <typename id_t>
+        ZERO_API class IDStorage
         {
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -70,21 +68,26 @@ namespace zero
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // TYPES
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            using ids_map_t = zMap<id_t, bool>;
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // FIELDS
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            bool       mLocked;
-            zFlag      mLockedFlag;
-            std::mutex mMutex;
+            zMutex           mMutex;
+            ids_map_t        mIDs;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // DELETED
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            Mutex(const Mutex&) noexcept            = delete;
-            Mutex& operator=(const Mutex&) noexcept = delete;
-            Mutex(Mutex&&) noexcept                 = delete;
-            Mutex& operator=(Mutex&&) noexcept      = delete;
+            IDStorage(const IDStorage&)            = delete;
+            IDStorage& operator=(const IDStorage&) = delete;
+            IDStorage(IDStorage&&)                 = delete;
+            IDStorage& operator=(IDStorage&&)      = delete;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -93,85 +96,76 @@ namespace zero
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // CONSTRUCTOR & DESTRUCTOR
+            // CONSTRUCTORS & DESTRUCTOR
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             /*!
-             * @throw no exceptions
+               \param cap initial capacity
+               \throws bad_alloc
             */
-            explicit Mutex() ZERO_NOEXCEPT;
+            explicit IDStorage()
+                :
+                mMutex(),
+                mIDs()
+            {
+            }
 
             /*!
-             * @throw no exception
+               \throws nothing
             */
-            virtual ~Mutex() ZERO_NOEXCEPT;
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // GETTERS & SETTERS
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            /**
-             * @brief
-             * Check if this mutex is locked
-             *
-             * @thread_safety thread-safe (atomic, not thread-lock)
-             * @throws no exception
-            **/
-            virtual bool isLocked() final;
-
-            /**
-             * @brief
-             * Returns native handler
-             *
-             * @thread_safety not thread-safe
-             * @throws no exception
-            **/
-            virtual handle_t native_handle() ZERO_NOEXCEPT final;
+            IDStorage::~IDStorage() ZERO_NOEXCEPT = default;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // METHODS
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            /**
-             * @brief
-             * Tries to lock this mutex
-             *
-             * @thread_safety thread-safe (atomic, not thread-lock)
-             * @returns 'true' if locked, 'false' if failed
-             * @throws no exception
-            **/
-            virtual bool try_lock() ZERO_NOEXCEPT final;
+            /*!
+               \thred_safety spinner lock used
+               \return unique id
+               \throws mutex, bad_alloc
+            */
+            id_t generateID()
+            {// @TODO: generateID()
+                id_t result(0);
 
-            /**
-             * @brief
-             * Lock this mutex
-             *
-             * @thread_safety thread-safe (atomic, no locks)
-             * @throws can throw exception (self-lock, etc)
-            **/
-            virtual void lock() final;
+                zSpinLock lock(&mMutex);
 
-            /**
-             * @brief
-             * Unlock this mutex
-             *
-             * @thread_safety thread-safe (atomics, no locks)
-             * @throws no exception
-            **/
-            virtual void unlock() ZERO_NOEXCEPT final;
+                const auto beginIter(mIDs.cbegin());
+                const auto endIter(mIDs.cend());
+                
+                //ids_map_t::iterator iter(mIDs.begin());
+                bool isReserved(true);
+                for (auto iter = mIDs.begin(); iter != endIter; iter++)
+                {
+                    isReserved = iter->second;
+                    if (!isReserved) {
+                        result = iter->first;
+                        break;
+                    }
+                }
+
+                if (!result) {
+                    result = mIDs.size() + 1;
+                }
+
+                mIDs[result] = true;
+
+                return result;
+            }
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        }; /// zero::core::Mutex
+        }; /// zero::ecs::IDStorage
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    } /// zero::core
+    } /// zero::ecs
 
 } /// zero
 
-using zMutex = zero::core::Mutex;
+template <typename T>
+using zIDStorage = zero::ecs::IDStorage<T>;
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-#endif /// !ZERO_CORE_MUTEX_HPP
+#endif /// !ZERO_ECS_ID_STORAGE_HPP

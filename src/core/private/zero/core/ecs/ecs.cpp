@@ -1,4 +1,4 @@
-﻿/**
+/**
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -8,45 +8,15 @@
  * SOFTWARE.
 **/
 
-#ifndef ZERO_CORE_HPP
-#define ZERO_CORE_HPP
-
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // INCLUDES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// Include zero::core::api
-#ifndef ZERO_CONFIG_API_HPP
-#include <zero/core/configs/zero_api.hpp>
-#endif /// !ZERO_CONFIG_API_HPP
-
-// Include zero::core::numeric
-#ifndef ZERO_CONFIG_NUMERIC_HPP
-#include <zero/core/configs/zero_numeric.hpp>
-#endif /// !ZERO_CONFIG_NUMERIC_HPP
-
-// Include zero::memory
-#ifndef ZERO_CONFIG_MEMORY_HPP
-#include <zero/core/configs/zero_memory.hpp>
-#endif /// !ZERO_CONFIG_MEMORY_HPP
-
-// Include zero::core::Log
-#ifndef ZERO_CORE_LOG_HPP
-#include <zero/core/metrics/log/Log.hpp>
-#endif /// !ZERO_CORE_LOG_HPP
-
-// Include zero::ecs
+// HEADER
 #ifndef ZERO_ECS_HPP
 #include <zero/core/ecs/ecs.hpp>
 #endif /// !ZERO_ECS_HPP
 
-// Include zero::core::Application
-#ifndef ZERO_CORE_APPLICATION_HPP
-#include <zero/core/app/Application.hpp>
-#endif /// !ZERO_CORE_APPLICATION_HPP
-
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-#endif // !ZERO_CORE_HPP
