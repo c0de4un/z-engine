@@ -17,6 +17,11 @@
 // INCLUDES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+// Include zero::atomic
+#ifndef ZERO_CONFIG_ATOMIC_HPP
+#include <zero/core/configs/zero_atomic.hpp>
+#endif /// !ZERO_CONFIG_ATOMIC_HPP
+
 // Include ecs::types
 #ifndef ZERO_ECS_TYPES_HPP
 #include "./types/types.hpp"
@@ -26,6 +31,107 @@
 #ifndef ZERO_ECS_ID_STORAGE_HPP
 #include <zero/core/ecs/types/IDStorage.hpp>
 #endif /// !ZERO_ECS_ID_STORAGE_HPP
+
+// Include ecs::SystemsManager
+#ifndef ZERO_ECS_SYSTEMS_MANAGER_HPP
+#include <zero/core/ecs/systems/SystemsManager.hpp>
+#endif /// !ZERO_ECS_SYSTEMS_MANAGER_HPP
+
+// Include ecs::System
+#ifndef ZERO_ECS_SYSTEM_HPP
+#include <zero/core/ecs/systems/System.hpp>
+#endif /// !ZERO_ECS_SYSTEM_HPP
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// TYPES
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+namespace zero
+{
+
+    namespace ecs
+    {
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // ECSEngine
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        /*!
+           \brief ECSEngine wrapper about all ECS parts
+           \version 1.0
+           \authords c0de4un
+           \since 12.03.2023
+        */
+        ZERO_API class ECSEngine final
+        {
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // META
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            ZERO_CLASS
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        private:
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // FIELDS
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            static std::atomic_flag  mInitialized;
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // CONSTRUCTORS
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            explicit ECSEngine();
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // DELETED
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            ECSEngine(const ECSEngine&)            = delete;
+            ECSEngine& operator=(const ECSEngine&) = delete;
+            ECSEngine(ECSEngine&&)                 = delete;
+            ECSEngine& operator=(ECSEngine&&)      = delete;
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public:
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // DESTRUCTOR
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            ~ECSEngine() ZERO_NOEXCEPT;
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // METHODS
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            static void Initialize();
+            static void Terminate();
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        }; /// zero::ecs::ECSEngine
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    } /// zero::ecs
+
+} /// zero
+
+using zECS = zero::ecs::ECSEngine;
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 

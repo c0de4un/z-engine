@@ -19,4 +19,59 @@
 #include <zero/core/ecs/ecs.hpp>
 #endif /// !ZERO_ECS_HPP
 
+// Include ecs::SystemsManager
+#ifndef ZERO_ECS_SYSTEMS_MANAGER_HPP
+#include <zero/core/ecs/systems/SystemsManager.hpp>
+#endif /// !ZERO_ECS_SYSTEMS_MANAGER_HPP
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// ECSEngine
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+namespace zero
+{
+
+    namespace ecs
+    {
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // FIELDS
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        std::atomic_flag ECSEngine::mInitialized;
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // CONSTRUCTORS & DESTRUCTORS
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        ECSEngine::ECSEngine()                = default;
+        ECSEngine::~ECSEngine() ZERO_NOEXCEPT = default;
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // METHODS
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        void ECSEngine::Initialize()
+        {
+            if (mInitialized.test_and_set())
+                return;
+
+            zSystems::Initialize();
+        }
+
+        void ECSEngine::Terminate()
+        {
+            mInitialized.clear();
+
+            zSystems::Terminate();
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    }
+
+}
+
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =

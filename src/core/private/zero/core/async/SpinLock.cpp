@@ -40,9 +40,11 @@ namespace zero
         // CONSTRUCTORS & DESTRUCTOR
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        SpinLock::SpinLock(zIMutex* const pMutex)
-            : BaseLock(pMutex)
+        SpinLock::SpinLock(zIMutex* const pMutex, const bool delayedLock)
+            : BaseLock(pMutex, delayedLock)
         {
+            if (pMutex && !delayedLock)
+                lock(pMutex);
         }
 
         SpinLock::~SpinLock() ZERO_NOEXCEPT = default;

@@ -45,7 +45,7 @@ namespace zero
         // CONSTRUCTOR & DESTRUCTOR
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        BaseLock::BaseLock (zIMutex* const pMutex) ZERO_NOEXCEPT
+        BaseLock::BaseLock (zIMutex* const pMutex, const bool delayedLock) ZERO_NOEXCEPT
             :
             mMutex(pMutex)
         {

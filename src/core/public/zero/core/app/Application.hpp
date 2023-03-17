@@ -22,6 +22,11 @@
 #include "../../../../public/zero/core/configs/zero_api.hpp"
 #endif /// !ZERO_CONFIG_API_HPP
 
+// Include zero::ecs::System
+#ifndef ZERO_ECS_SYSTEM_HPP
+#include <zero/core/ecs/systems/System.hpp>
+#endif /// !ZERO_ECS_SYSTEM_HPP
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // TYPES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -79,7 +84,6 @@ namespace zero
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                 // CONSTRUCTOR
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 
                 /*!
                   \brief Application constructor

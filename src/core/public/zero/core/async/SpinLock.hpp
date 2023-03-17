@@ -89,9 +89,10 @@ namespace zero
 
             /*!
                \param pMutex mutex contract instance to use
+               \param delayedLock true to delay lock
                \throws std::bad_alloc
             */
-            explicit SpinLock(zIMutex* const pMutex) ZERO_NOEXCEPT;
+            explicit SpinLock(zIMutex* const pMutex, const bool delayedLock = false) ZERO_NOEXCEPT;
 
             /*!
                \throws nothing

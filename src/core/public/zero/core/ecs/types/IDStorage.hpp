@@ -125,7 +125,7 @@ namespace zero
                \throws mutex, bad_alloc
             */
             id_t generateID()
-            {// @TODO: generateID()
+            {
                 id_t result(0);
 
                 zSpinLock lock(&mMutex);
@@ -151,6 +151,13 @@ namespace zero
                 mIDs[result] = true;
 
                 return result;
+            }
+
+            void releaseID(const id_t id)
+            {
+                zSpinLock lock(&mMutex);
+
+                mIDs[id] = false;
             }
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

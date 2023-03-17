@@ -73,9 +73,10 @@ namespace zero
 
             /*!
              * @param pMutex mutex
+             * @param delayedLock true to delay lock
              * @throw throw no exception
             */
-            explicit BaseLock(zIMutex* const pMutex) ZERO_NOEXCEPT;
+            explicit BaseLock(zIMutex* const pMutex, const bool delayedLock = false) ZERO_NOEXCEPT;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // DELETED

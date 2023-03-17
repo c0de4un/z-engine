@@ -22,10 +22,10 @@
 #include <zero/core/configs/zero_api.hpp>
 #endif /// !ZERO_CONFIG_API_HPP
 
-// Include zero::numeric
-#ifndef ZERO_CONFIG_NUMERIC_HPP
-#include <zero/core/configs/zero_numeric.hpp>
-#endif /// !ZERO_CONFIG_NUMERIC_HPP
+// Include ecs::types
+#ifndef ZERO_ECS_TYPES_HPP
+#include <zero/core/ecs/types/types.hpp>
+#endif /// !ZERO_ECS_TYPES_HPP
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // TYPES
@@ -78,6 +78,18 @@ namespace zero
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // GETTERS & SETTERS
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            /*!
+               \throws nothing
+               \return type-id
+            */
+            virtual TypeID getTypeID() const noexcept = 0;
+
+            /*!
+               \throws nothing
+               \return id
+            */
+            virtual ObjectID getID() const noexcept = 0;
 
             /*!
                \thread_safety thread-safe

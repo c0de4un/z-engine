@@ -28,9 +28,11 @@
 
 using TypeID = z_uint_8_t;
 static constexpr const TypeID MAX_TYPE_ID = std::numeric_limits<z_uint_8_t>::max() - 1;
+static constexpr const TypeID INVALID_TYPE_ID = 0;
 
 using ObjectID = z_uint_32_t;
 static constexpr const ObjectID MAX_OBJECT_ID = std::numeric_limits<z_uint_32_t>::max() - 1;
+static constexpr const ObjectID INVALID_OBJECT_ID = 0;
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
