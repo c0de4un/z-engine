@@ -23,8 +23,6 @@
 
 #include <cassert>
 
-#include <exception>
-
 #include <string>
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

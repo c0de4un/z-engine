@@ -27,11 +27,6 @@
 #include <zero/core/configs/zero_debug.hpp>
 #endif /// !ZERO_CONFIG_DEBUG_HPP
 
-#else
-
-// Include STL exception
-#include <exception>
-
 #endif
 /// DEBUG
 

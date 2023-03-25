@@ -22,6 +22,9 @@
 #include <zero/core/configs/zero_platform.hpp>
 #endif /// !ZERO_CONFIG_PLATFORM_HPP
 
+// Include STL exception
+#include <exception>
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // API
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

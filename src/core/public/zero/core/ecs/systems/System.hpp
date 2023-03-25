@@ -138,13 +138,13 @@ namespace zero
             // METHODS
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            bool onStart();
+            virtual bool onStart();
 
-            bool onPause();
+            virtual bool onPause();
 
-            bool onResume();
+            virtual bool onResume();
 
-            void onStop();
+            virtual void onStop();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // DELETED

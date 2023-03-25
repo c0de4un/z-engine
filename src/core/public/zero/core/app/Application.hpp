@@ -81,6 +81,19 @@ namespace zero
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                // METHODS.System
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+                virtual bool onStart() override;
+
+                virtual bool onPause() override;
+
+                virtual bool onResume() override;
+
+                virtual void onStop() override;
+
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                 // CONSTRUCTOR
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
