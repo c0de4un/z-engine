@@ -50,7 +50,7 @@ namespace zero
             \version 0.1
             \author c0de4un
         */
-        ZERO_API class Application
+        ZERO_API class Application : public zSystem
         {
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

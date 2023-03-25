@@ -238,6 +238,8 @@ namespace zero
 
 } /// zero
 
+using zSystem = zero::ecs::System;
+
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 #endif /// !ZERO_ECS_SYSTEM_HPP

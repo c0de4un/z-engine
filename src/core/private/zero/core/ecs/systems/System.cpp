@@ -153,6 +153,26 @@ namespace zero
             systemsManager->poolID(id);
         }
 
+        bool System::onStart()
+        {
+            throw std::exception("System::onStart: not implemented");
+        }
+
+        bool System::onPause()
+        {
+            throw std::exception("System::onPause: not implemented");
+        }
+
+        bool System::onResume()
+        {
+            throw std::exception("System::onResume: not implemented");
+        }
+
+        void System::onStop()
+        {
+            throw std::exception("System::onStop: not implemented");
+        }
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         // OVERRIDE.ISystem
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
