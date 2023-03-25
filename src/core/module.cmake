@@ -15,6 +15,7 @@ set( ZERO_HEADERS
     # CONFIGS
     "${ZERO_CORE_PUBLIC}configs/zero_api.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_atomic.hpp"
+    "${ZERO_CORE_PUBLIC}configs/zero_debug.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_map.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_memory.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_mutex.hpp"

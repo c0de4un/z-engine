@@ -44,7 +44,18 @@ namespace zero
             mLockedFlag.clear();
         }
 
-        Mutex::~Mutex() ZERO_NOEXCEPT = default;
+        Mutex::~Mutex() ZERO_NOEXCEPT
+        {
+            try
+            {
+                if (isLocked())
+                    mMutex.unlock();
+            }
+            catch (...)
+            {
+                mLockedFlag.clear();
+            }
+        }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         // GETTERS & SETTERS

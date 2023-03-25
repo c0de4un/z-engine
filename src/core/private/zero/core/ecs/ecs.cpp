@@ -24,6 +24,17 @@
 #include <zero/core/ecs/systems/SystemsManager.hpp>
 #endif /// !ZERO_ECS_SYSTEMS_MANAGER_HPP
 
+// DEBUG
+#ifdef ZERO_DEBUG
+
+// Include zero::debug
+#ifndef ZERO_CONFIG_DEBUG_HPP
+#include <zero/core/configs/zero_debug.hpp>
+#endif /// !ZERO_CONFIG_DEBUG_HPP
+
+#endif
+// DEBUG
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // ECSEngine
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -55,6 +66,10 @@ namespace zero
 
         void ECSEngine::Initialize()
         {
+#ifdef ZERO_DEBUG // DEBUG
+            zLog::Info("ECSEngine::Initialize");
+#endif // DEBUG
+
             if (mInitialized.test_and_set())
                 return;
 
@@ -63,6 +78,10 @@ namespace zero
 
         void ECSEngine::Terminate()
         {
+#ifdef ZERO_DEBUG // DEBUG
+            zLog::Info("ECSEngine::Terminate");
+#endif // DEBUG
+
             mInitialized.clear();
 
             zSystems::Terminate();

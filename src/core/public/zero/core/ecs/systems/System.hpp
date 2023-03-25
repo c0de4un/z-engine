@@ -129,6 +129,24 @@ namespace zero
             explicit System(const TypeID typeId);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // GETTERS & SETTERS
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            inline void setState(const EState state, const bool shouldLock = true);
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // METHODS
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            bool onStart();
+
+            bool onPause();
+
+            bool onResume();
+
+            void onStop();
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // DELETED
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -169,16 +187,18 @@ namespace zero
             virtual ObjectID getID() const noexcept final;
 
             /*!
+               \param lock "true" to use thread-lock
                \thread_safety thread-safe
                \throws nothing
             */
-            virtual bool isStarted() const ZERO_NOEXCEPT final;
+            virtual bool isStarted(const bool lock = true) const ZERO_NOEXCEPT final;
 
             /*!
+               \param lock "true" to use thread-lock
                \thread_safety thread-safe
                \throws nothing
             */
-            virtual bool isPaused() const ZERO_NOEXCEPT final;
+            virtual bool isPaused(const bool lock = true) const ZERO_NOEXCEPT final;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // METHODS.ISystem
@@ -187,30 +207,21 @@ namespace zero
             /*!
                \brief Start or Resume System
                \thread_safety thread-safe (locks)
-               \return
-               < 0 if error
-               0 if failed
-               > 0 if OK
                \throws can throw exception
             */
-            virtual z_int_8_t Start() final;
+            virtual bool Start() final;
 
             /*!
              * @brief Pause System
              * @thread_safety - thread-safe
-             * @return > 0 if OK, < 0 if error, 0 if failed
              * @throws can throw exception
             */
-            virtual z_int_8_t Pause() final;
+            virtual bool Pause() final;
 
             /*!
                \brief Resume System. Same as calling Start after Stop()
-               \return
-               < 0 if error
-               0 if failed
-               > 0 if OK
             */
-            virtual z_int_8_t Resume() final;
+            virtual bool Resume() final;
 
             /*!
              * @brief 

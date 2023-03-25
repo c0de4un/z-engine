@@ -19,6 +19,22 @@
 #include <zero/core/ecs/systems/SystemsManager.hpp>
 #endif /// !ZERO_ECS_SYSTEMS_MANAGER_HPP
 
+/// DEBUG
+#ifdef ZERO_DEBUG
+
+// Include zero::debug
+#ifndef ZERO_CONFIG_DEBUG_HPP
+#include <zero/core/configs/zero_debug.hpp>
+#endif /// !ZERO_CONFIG_DEBUG_HPP
+
+#else
+
+// Include STL exception
+#include <exception>
+
+#endif
+/// DEBUG
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // SystemsManager
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -47,9 +63,19 @@ namespace zero
             mIDStorageMutex(),
             mIDs()
         {
+#ifdef ZERO_DEBUG /// DEBUG
+            zLog::Info("SystemsManager::construct");
+#endif /// DEBUG
         }
 
+#ifdef ZERO_DEBUG /// DEBUG
+        SystemsManager::~SystemsManager() ZERO_NOEXCEPT
+        {
+            zLog::Info("SystemsManager::destructor");
+        }
+#else /// !DEBUG
         SystemsManager::~SystemsManager() ZERO_NOEXCEPT = default;
+#endif /// DEBUG
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         // GETTERS & SETTERS
@@ -57,6 +83,12 @@ namespace zero
 
         SystemsManager* SystemsManager::getInstance()
         {
+#ifdef ZERO_DEBUG /// DEBUG
+            zAssert(mInstance && "SystemsManager::getInstance: not initialized !");
+#else /// !DEBUG
+            if (!mInstance)
+                throw std::exception("SystemsManager is not initialized");
+#endif /// DEBUG
             zSpinLock lock(&mInstanceMutex);
 
             return mInstance;

@@ -110,30 +110,23 @@ namespace zero
             /*!
                \brief Start or Resume System
                \thread_safety thread-safe (locks)
-               \return
-               < 0 if error
-               0 if failed
-               > 0 if OK
+               \return true if OK
                \throws can throw exception
             */
-            virtual z_int_8_t Start() = 0;
+            virtual bool Start() = 0;
 
             /*!
              * @brief Pause System
              * @thread_safety - thread-safe
-             * @return > 0 if OK, < 0 if error, 0 if failed
              * @throws can throw exception
             */
-            virtual z_int_8_t Pause() = 0;
+            virtual bool Pause() = 0;
 
             /*!
                \brief Resume System. Same as calling Start after Stop()
                \return
-               < 0 if error
-               0 if failed
-               > 0 if OK
             */
-            virtual z_int_8_t Resume() = 0;
+            virtual bool Resume() = 0;
 
             /*!
              * @brief 
