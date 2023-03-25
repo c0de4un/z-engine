@@ -24,6 +24,9 @@ set( ZERO_HEADERS
     "${ZERO_CORE_PUBLIC}configs/zero_vector.hpp"
     # APPLICATION
     "${ZERO_CORE_PUBLIC}app/Application.hpp"
+    # GAME
+    "${ZERO_CORE_PUBLIC}game/IGame.hxx"
+    "${ZERO_CORE_PUBLIC}game/Game.hpp"
     # ASYNC
     "${ZERO_CORE_PUBLIC}async/BaseLock.hpp"
     "${ZERO_CORE_PUBLIC}async/IMutex.hxx"
@@ -65,6 +68,8 @@ set( ZERO_HEADERS
 set( ZERO_SOURCES
     # APPLICATION
     "${ZERO_CORE_PRIVATE}app/Application.cpp"
+    # GAME
+    "${ZERO_CORE_PRIVATE}game/Game.cpp"
     # ASYNC
     "${ZERO_CORE_PRIVATE}async/BaseLock.cpp"
     "${ZERO_CORE_PRIVATE}async/Mutex.cpp"
