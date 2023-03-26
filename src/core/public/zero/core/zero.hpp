@@ -57,6 +57,16 @@
 #include <zero/core/engine/Engine.hpp>
 #endif /// !ZERO_CORE_ENGINE_HPP
 
+// Include zero::core::GraphicsProvider
+#ifndef ZERO_CORE_GRAPHICS_PROVIDER_HPP
+#include <zero/core/graphics/GraphicsProvider.hpp>
+#endif /// !ZERO_CORE_GRAPHICS_PROVIDER_HPP
+
+// Include zero::core::Graphics
+#ifndef ZERO_CORE_GRAPHICS_HPP
+#include <zero/core/graphics/Graphics.hpp>
+#endif /// !ZERO_CORE_GRAPHICS_HPP
+
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 #endif // !ZERO_CORE_HPP

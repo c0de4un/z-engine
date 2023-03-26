@@ -62,6 +62,10 @@ set( ZERO_HEADERS
     "${ZERO_CORE_PUBLIC}engine/IEngine.hxx"
     "${ZERO_CORE_PUBLIC}engine/Engine.hpp"
     "${ZERO_CORE_PUBLIC}engine/EngineProvider.hpp"
+    # GRAPHICS
+    "${ZERO_CORE_PUBLIC}graphics/GraphicsProvider.hpp"
+    "${ZERO_CORE_PUBLIC}graphics/IGraphics.hxx"
+    "${ZERO_CORE_PUBLIC}graphics/Graphics.hpp"
     # PCH
     "${ZERO_CORE_PUBLIC}zero.hpp"
     ${ZERO_HEADERS} )
@@ -96,6 +100,9 @@ set( ZERO_SOURCES
     # ENGINE
     "${ZERO_CORE_PRIVATE}engine/Engine.cpp"
     "${ZERO_CORE_PRIVATE}engine/EngineProvider.cpp"
+    # GRAPHICS
+    "${ZERO_CORE_PRIVATE}graphics/Graphics.cpp"
+    "${ZERO_CORE_PRIVATE}graphics/GraphicsProvider.cpp"
     # PCH
     "${ZERO_CORE_PRIVATE}zero.cpp"
     ${ZERO_SOURCES} )
