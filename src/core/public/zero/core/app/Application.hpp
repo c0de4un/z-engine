@@ -17,11 +17,6 @@
 // INCLUDES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// Include zero::core::config
-#ifndef ZERO_CONFIG_API_HPP
-#include "../../../../public/zero/core/configs/zero_api.hpp"
-#endif /// !ZERO_CONFIG_API_HPP
-
 // Include zero::ecs::System
 #ifndef ZERO_ECS_SYSTEM_HPP
 #include <zero/core/ecs/systems/System.hpp>

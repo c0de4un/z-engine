@@ -19,6 +19,11 @@
 #include <zero/core/app/Application.hpp>
 #endif /// !ZERO_CORE_APPLICATION_HPP
 
+// Include zer::types
+#ifndef ZERO_CONFIG_TYPES_HPP
+#include <zero/core/configs/zero_types.hpp>
+#endif /// !ZERO_CONFIG_TYPES_HPP
+
 // DEBUG
 #ifdef ZERO_DEBUG
 
@@ -52,7 +57,10 @@ namespace zero
         // CONSTRUCTOR & DESTRUCTOR
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        Application::Application() ZERO_NOEXCEPT = default;
+        Application::Application() ZERO_NOEXCEPT
+            : System(static_cast<TypeID>(zECoreTypes::APPLICATION))
+        {
+        }
 
         Application::~Application() ZERO_NOEXCEPT = default;
 

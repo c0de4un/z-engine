@@ -21,6 +21,7 @@ set( ZERO_HEADERS
     "${ZERO_CORE_PUBLIC}configs/zero_mutex.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_numeric.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_platform.hpp"
+    "${ZERO_CORE_PUBLIC}configs/zero_types.hpp"
     "${ZERO_CORE_PUBLIC}configs/zero_vector.hpp"
     # APPLICATION
     "${ZERO_CORE_PUBLIC}app/Application.hpp"

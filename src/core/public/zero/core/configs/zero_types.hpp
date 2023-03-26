@@ -8,8 +8,8 @@
  * SOFTWARE.
 **/
 
-#ifndef ZERO_CORE_I_GAME_HXX
-#define ZERO_CORE_I_GAME_HXX
+#ifndef ZERO_CONFIG_TYPES_HPP
+#define ZERO_CONFIG_TYPES_HPP
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
@@ -17,7 +17,10 @@
 // INCLUDES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-
+// Include ecs::types
+#ifndef ZERO_ECS_TYPES_HPP
+#include <zero/core/ecs/types/types.hpp>
+#endif /// !ZERO_ECS_TYPES_HPP
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // TYPES
@@ -32,15 +35,23 @@ namespace zero
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        // IGame
+        // ECoreTypes
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+        enum class ECoreTypes : TypeID
+        {
+            APPLICATION = 1,
+            MAX_TYPE = 100
+        };
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    } /// core
+    } /// zero::core
 
-} /// zer
+} /// zero
+
+using zECoreTypes = zero::core::ECoreTypes;
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-#endif /// !ZERO_CORE_I_GAME_HXX
+#endif /// !ZERO_CONFIG_TYPES_HPP

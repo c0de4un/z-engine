@@ -95,13 +95,13 @@ namespace zero
                \thread_safety thread-safe
                \throws nothing
             */
-            virtual bool isStarted() const ZERO_NOEXCEPT = 0;
+            virtual bool isStarted(const bool lock = true) const ZERO_NOEXCEPT = 0;
 
             /*!
                \thread_safety thread-safe
                \throws nothing
             */
-            virtual bool isPaused() const ZERO_NOEXCEPT = 0;
+            virtual bool isPaused(const bool lock = true) const ZERO_NOEXCEPT = 0;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // METHODS

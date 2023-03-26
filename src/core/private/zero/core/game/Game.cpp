@@ -14,8 +14,34 @@
 // INCLUDES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+// Include zero::core::Game
+#ifndef ZERO_CORE_GAME_HPP
+#include <zero/core/game/Game.hpp>
+#endif /// !ZERO_CORE_GAME_HPP
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//
+// Game
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+namespace zero
+{
+
+    namespace core
+    {
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // CONSTRUCTOR & DESTRUCTOR
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        Game::Game()                = default;
+        Game::~Game() ZERO_NOEXCEPT = default;
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    }
+
+}
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
