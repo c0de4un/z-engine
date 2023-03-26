@@ -47,6 +47,16 @@
 #include <zero/core/app/Application.hpp>
 #endif /// !ZERO_CORE_APPLICATION_HPP
 
+// Include zero::core::EngineProvider
+#ifndef ZERO_CORE_ENGINE_PROVIDER_HPP
+#include <zero/core/engine/EngineProvider.hpp>
+#endif /// !ZERO_CORE_ENGINE_PROVIDER_HPP
+
+// Include zero::core::Engine
+#ifndef ZERO_CORE_ENGINE_HPP
+#include <zero/core/engine/Engine.hpp>
+#endif /// !ZERO_CORE_ENGINE_HPP
+
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 #endif // !ZERO_CORE_HPP

@@ -58,6 +58,10 @@ set( ZERO_HEADERS
     "${ZERO_CORE_PUBLIC}ecs/systems/SystemsManager.hpp"
     "${ZERO_CORE_PUBLIC}ecs/types/types.hpp"
     "${ZERO_CORE_PUBLIC}ecs/ecs.hpp"
+    # ENGINE
+    "${ZERO_CORE_PUBLIC}engine/IEngine.hxx"
+    "${ZERO_CORE_PUBLIC}engine/Engine.hpp"
+    "${ZERO_CORE_PUBLIC}engine/EngineProvider.hpp"
     # PCH
     "${ZERO_CORE_PUBLIC}zero.hpp"
     ${ZERO_HEADERS} )
@@ -89,6 +93,9 @@ set( ZERO_SOURCES
     "${ZERO_CORE_PRIVATE}ecs/systems/System.cpp"
     "${ZERO_CORE_PRIVATE}ecs/systems/SystemsManager.cpp"
     "${ZERO_CORE_PRIVATE}ecs/ecs.cpp"
+    # ENGINE
+    "${ZERO_CORE_PRIVATE}engine/Engine.cpp"
+    "${ZERO_CORE_PRIVATE}engine/EngineProvider.cpp"
     # PCH
     "${ZERO_CORE_PRIVATE}zero.cpp"
     ${ZERO_SOURCES} )

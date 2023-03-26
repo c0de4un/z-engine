@@ -8,8 +8,8 @@
  * SOFTWARE.
 **/
 
-#ifndef ZERO_CONFIG_TYPES_HPP
-#define ZERO_CONFIG_TYPES_HPP
+#ifndef ZERO_CORE_I_ENGINE_HXX
+#define ZERO_CORE_I_ENGINE_HXX
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
@@ -17,10 +17,10 @@
 // INCLUDES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// Include ecs::types
-#ifndef ZERO_ECS_TYPES_HPP
-#include <zero/core/ecs/types/types.hpp>
-#endif /// !ZERO_ECS_TYPES_HPP
+// Include zero::api
+#ifndef ZERO_CONFIG_API_HPP
+#include <zero/core/configs/zero_api.hpp>
+#endif /// !ZERO_CONFIG_API_HPP
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // TYPES
@@ -35,15 +35,36 @@ namespace zero
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        // ECoreTypes
+        // IEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        enum class ECoreTypes : TypeID
+        ZERO_API class IEngine final
         {
-            APPLICATION = 1,
-            ENGINE      = 2,
-            MAX_TYPE    = 100
-        };
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // META
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            ZERO_INTERFACE
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public:
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // DESTRUCTOR
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            virtual ~IEngine() ZERO_NOEXCEPT = default;
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+        }; /// zero::core::IEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -51,8 +72,9 @@ namespace zero
 
 } /// zero
 
-using zECoreTypes = zero::core::ECoreTypes;
+using zIEngine = zero::core::IEngine;
+#define ZERO_CORE_I_ENGINE_DECL
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-#endif /// !ZERO_CONFIG_TYPES_HPP
+#endif /// !ZERO_CORE_I_ENGINE_HXX

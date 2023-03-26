@@ -8,22 +8,24 @@
  * SOFTWARE.
 **/
 
-#ifndef ZERO_CONFIG_TYPES_HPP
-#define ZERO_CONFIG_TYPES_HPP
-
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // INCLUDES
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// Include ecs::types
-#ifndef ZERO_ECS_TYPES_HPP
-#include <zero/core/ecs/types/types.hpp>
-#endif /// !ZERO_ECS_TYPES_HPP
+// HEADER
+#ifndef ZERO_CORE_ENGINE_PROVIDER_HPP
+#include <zero/core/engine/EngineProvider.hpp>
+#endif /// !ZERO_CORE_ENGINE_PROVIDER_HPP
+
+// Include zero::core::Engine
+#ifndef ZERO_CORE_ENGINE_HPP
+#include <zero/core/engine/Engine.hpp>
+#endif /// !ZERO_CORE_ENGINE_HPP
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// TYPES
+// EngineProvider
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 namespace zero
@@ -35,24 +37,25 @@ namespace zero
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        // ECoreTypes
+        // CONSTRUCTOR & DESTRUCTOR
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        enum class ECoreTypes : TypeID
+        EngineProvider::EngineProvider() noexcept  = default;
+        EngineProvider::~EngineProvider() noexcept = default;
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // METHODS
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        zIEngine* EngineProvider::getEngine()
         {
-            APPLICATION = 1,
-            ENGINE      = 2,
-            MAX_TYPE    = 100
-        };
+            return nullptr;
+        }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    } /// zero::core
+    }
 
-} /// zero
-
-using zECoreTypes = zero::core::ECoreTypes;
+}
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-#endif /// !ZERO_CONFIG_TYPES_HPP
